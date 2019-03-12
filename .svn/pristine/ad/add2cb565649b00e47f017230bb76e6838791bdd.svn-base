@@ -1,0 +1,5 @@
+package com.webapp.login.dao;
+
+public interface UserDao {
+
+}

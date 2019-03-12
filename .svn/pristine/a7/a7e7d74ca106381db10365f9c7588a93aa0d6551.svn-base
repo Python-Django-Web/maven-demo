@@ -1,0 +1,9 @@
+package com.admin.login.service.serviceImpl;
+
+import org.springframework.stereotype.Service;
+
+import com.admin.login.service.AdministerService;
+@Service
+public class AdministerServiceImpl implements AdministerService{
+
+}

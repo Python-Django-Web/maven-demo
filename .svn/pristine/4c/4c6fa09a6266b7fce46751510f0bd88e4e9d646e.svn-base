@@ -1,0 +1,35 @@
+package com.admin.manage.service.serviceImpl;
+
+import java.util.List;
+import java.util.Map;
+import javax.transaction.Transactional;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import com.admin.manage.dao.SysMenuDao;
+import com.admin.manage.entity.SysMenuBean;
+import com.admin.manage.service.SysMenuService;
+
+@Service
+@Transactional
+public class SysMenuServiceImpl implements SysMenuService{
+
+	@Autowired
+	private SysMenuDao sysMenuDao;
+	
+	@Override
+	public List<SysMenuBean> queryUserMenuList(Map<String, Object> map) {
+		List<SysMenuBean> sysMenuBeans = sysMenuDao.queryUserMenuList(map);
+		return getDeepTreeMenu(sysMenuBeans);
+	}
+	
+	
+	public List<SysMenuBean> getDeepTreeMenu(List<SysMenuBean> list) {
+		if(list.size() == 0) {
+			return null;
+		}
+		for(SysMenuBean sysMenuBean : list) {
+			sysMenuBean.setChildren(sysMenuDao.queryPubList(sysMenuBean.getMenu_id()));
+		}
+		return list;
+	}
+}

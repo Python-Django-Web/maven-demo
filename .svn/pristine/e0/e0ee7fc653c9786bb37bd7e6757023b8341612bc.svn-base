@@ -1,0 +1,5 @@
+package com.admin.login.service.serviceImpl;
+
+public class SysUserServiceImpl {
+
+}

@@ -1,0 +1,5 @@
+package com.admin.login.entity;
+
+public class Administer {
+
+}

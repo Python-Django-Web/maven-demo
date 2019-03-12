@@ -1,0 +1,46 @@
+package com.admin.login.controller;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.admin.login.entity.Administer;
+import com.admin.login.service.AdministerService;
+import com.tool.GeneralReturn;
+/**
+ * @since Administer class
+ * @author HuWang
+ *
+ */
+@RestController
+@RequestMapping("/admin/Administer/")
+public class AdministerController {
+
+	@Autowired
+	private AdministerService AdministerService;
+	
+	/**
+	 * @see selectList<Administer>
+	 * @return
+	 */
+	@RequestMapping("/selectList")
+	public List<Administer> selectList(){
+		return AdministerService.selectList();
+	}
+	
+	/**
+	 * @see selectId<id>
+	 * @param id
+	 * @return
+	 */
+	@RequestMapping(value="/selectId/{id}",method=RequestMethod.GET) 
+	public GeneralReturn selectId(@PathVariable("id")int id ){
+		
+		Administer admin = AdministerService.selectId(id);
+		return GeneralReturn.build(1, "success", admin);
+	}
+}
